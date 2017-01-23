@@ -9,6 +9,8 @@ RUN apt-get update && \
 		openssh-client \
         && apt-get clean
 
+RUN echo "IdentityFile ~/ssh_key" > ~/.ssh/config
+
 ADD gotty /bin/
 
 EXPOSE 8080
