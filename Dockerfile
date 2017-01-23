@@ -6,12 +6,14 @@ RUN apt-get update && \
 		git \
 		wget \
 		screen \
+		openssh-client \
         && apt-get clean
 
 ADD gotty /bin/
 
-VOLUME /root
+EXPOSE 8080
+
 VOLUME /app
+VOLUME /.ssh
 
-ENTRYPOINT /bin/gotty -w --timeout "0" -p 8080 -a 0.0.0.0 --reconnect /bin/bash -c "screen -x || screen"
-
+ENTRYPOINT /bin/gotty -w -p 8080 -a 0.0.0.0 --reconnect /bin/bash -c "screen -x || screen bash -l"
